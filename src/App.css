@@ -68,25 +68,33 @@ body {
 .rouletteWheel { 
   font-family: 'Ultra', serif;
   font-size: 1.5rem;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 1rem;
 }
 
 #randomChoice {
   margin: 10% 20%;
   display: grid;
+  column-gap: .5rem;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: column;
   justify-content: center;
-  justify-items: center;
-  align-items: center;
+  place-items: center;
 }
-
+.square {
+  width: 100%;
+  padding: 5rem 0;
+  background-color: white;
+  text-align: center;
+  border-radius: 1rem;
+}
 .spin {
   border-radius: 20rem;
-  padding: 8% 10%;
-  font-size: 1rem;
+  padding: 14% 10%;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
   font-family: "Lato", serif;
   width: fit-content;
+  background-color: rgb(7, 145, 2);
+  border-color: gold;
+  border-width: .2rem;
 }

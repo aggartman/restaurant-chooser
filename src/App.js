@@ -41,9 +41,15 @@ function App() {
         </div>
       </div>
       <div id='randomChoice'>
-        <h3 className='rouletteWheel' id='rw1'> </h3>
-        <p className='rouletteWheel' id='rw2'> </p>
-        <p className='rouletteWheel' id='rw3'> </p>
+        <div className='square'>
+          <h3 className='rouletteWheel' id='rw1'> </h3>
+        </div>
+        <div className='square'>
+          <p className='rouletteWheel' id='rw2'> </p>
+        </div>
+        <div className='square'>
+          <p className='rouletteWheel' id='rw3'> </p>
+        </div>
         <button className='spin' onClick={spinRoulette}>Spin</button>
       </div>
     </>
