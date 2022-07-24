@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import restaurantRoulette from './restaurantRoulette'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <>
+      <h1 className='title'>
+        Restaurant Roulette
+      </h1>
+      <div className='about'>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Ever get stuck choosing a place to eat? 
+          Indecisive much? 
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <p>
+          Well then spin the wheels and try your luck
+        </p>
+      </div>
+      <div id='rouletteWheels'>
+        <p id='restaurantName'></p>
+        <p id='AvgPrice'></p>
+        <p id='cusine'></p>
+      </div>
+    </>
   );
 }
 
