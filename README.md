@@ -5,4 +5,4 @@ For those who refuse location scraping, than a zip code option will also be avai
 
 Cuisine and Price categories will be able to be locked to filter the results to your specified selections. 
 
-&copyAustin Gartman 2022
+©Austin Gartman 2022
