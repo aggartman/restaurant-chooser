@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Ultra&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" /> 
+    <title>Restaurant Roulette</title>
+  </head>
+  <body>
+    <div className='container1'>
+      <h1 className='title'>
+        Restaurant Roulette
+      </h1>
+      <div className='about'>
+        <p>
+          Ever get stuck choosing a place to eat? 
+          Indecisive much? 
+        </p>
+        <p>
+          Well then spin the wheels and try your luck!
+        </p>
+      </div>
+    </div>
+    <div id='randomChoice'>
+      <div className='lockContain' id='lC1'>
+        <span className={`material-symbols-outlined id='lock1'>
+          lock_open
+        </span>
+      </div>
+      <div className='lockContain' id='lC2'>
+        <span className="material-symbols-outlined" id='lock2'>
+          lock
+        </span>
+      </div>
+      <div className='square' id='rw1'>
+        <h3 className='rouletteWheel'> </h3>
+      </div>
+      <div className='square' id='rw2'>
+        <p className='rouletteWheel'> </p>
+      </div>
+      <div className='square' id='rw3'>
+        <p className='rouletteWheel'> </p>
+      </div>
+      <button className='spin' onClick={spinRoulette}>Spin</button>
+    </div>
+    <script defer src="/main.js"></script>
+  </body>
+</html>
