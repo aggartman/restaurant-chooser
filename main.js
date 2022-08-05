@@ -8,12 +8,27 @@ const restaurantList = [
 function populateSelectors() {
   var cuisineSelector = document.getElementById('cuisine');
   var priceSelector = document.getElementById('price');
+  var cuisineSet = new Set();
+  var cuisineList = [];
+  var priceSet = new Set();
+  var priceList = [];
+
   restaurantList.forEach( function(restaurant) {
+    cuisineSet.add(restaurant.cuisine);
+    cuisineList = [...cuisineSet].sort();
+    priceSet.add(restaurant.price);
+    priceList = [...priceSet].sort();
+  })
+
+  cuisineList.forEach( function(cuisine) {
     let cuisineOption = document.createElement('option');
-    let priceOption = document.createElement('option');
-    cuisineOption.innerText = restaurant.cuisine;
-    priceOption.innerText = restaurant.price;
+    cuisineOption.innerText = cuisine;
     cuisineSelector.appendChild(cuisineOption);
+  })
+
+  priceList.forEach( function(price){
+    let priceOption = document.createElement('option');
+    priceOption.innerText = price;
     priceSelector.appendChild(priceOption);
   })
 }
@@ -29,54 +44,73 @@ lock2.addEventListener('click', toggleLock);
 function selectCategories(category) {
   if (category === 'cuisine') {
     var selectedCuisine = document.getElementById('cuisine');
-    var selectedItem = selectedCuisine.options[selectedCuisine.selectedIndex].value;
+    var selectedItem = [selectedCuisine.options[selectedCuisine.selectedIndex].value];
     return selectedItem
   } else if (category === 'price') {
     var selectedPrice = document.getElementById('price');
-    var selectedItem2 = selectedPrice.options[selectedPrice.selectedIndex].value;
-    return selectedItem
+    var selectedItem2 = [selectedPrice.options[selectedPrice.selectedIndex].value];
+    return selectedItem2
   } else if (category === 'both') {
     selectedCuisine = document.getElementById('cuisine');
     selectedPrice = document.getElementById('price');
     selectedItem = selectedCuisine.options[selectedCuisine.selectedIndex].value;
-    var selectedItem2 = selectedPrice.options[selectedPrice.selectedIndex].value;
+    selectedItem2 = selectedPrice.options[selectedPrice.selectedIndex].value;
     var selectedItems = [selectedItem, selectedItem2];
     return selectedItems
   }
-}
-
-  
+} 
 function filterList(id) { 
-  selectCategories(id);
+  var selected = selectCategories(id);
   var selectedList = [];
   restaurantList.forEach(function(restaurant) {
-    if (id == 'cuisine') {
-      if (restaurant.cuisine === selectedItem) {
+    if (id === 'both') {
+      if (restaurant.cuisine === selected[0] && restaurant.price === selected[1]) {
+        selectedList.push(restaurant);
+      }
+    } else if (id == 'cuisine') {
+      if (restaurant.cuisine === selected[0]) {
         selectedList.push(restaurant);
       } 
     } else if (id == 'price') {
-      if (restaurant.price === selectedItem) {
+      if (restaurant.price === selected[0]) {
         selectedList.push(restaurant);
       }
     }
   })
-  return selectedList
+  if (selectedList.length > 0) {
+    return selectedList
+  } else {
+    var error = [{name : 'Error:', cuisine : 'No', price : 'Restaurant'}];
+    return error
+  }
 }
+
+function randomSelector(selectedList) {
+  var choice = selectedList[Math.floor(Math.random() * selectedList.length)];
+  return choice
+}
+
 function randomChoice() {
-  if (lock1.innerText === 'lock') {
-    var selectedList = filterList('cuisine');
-    choice = selectedList[Math.floor(Math.random() * selectedList.length)];
+  var selectedList;
+  if (lock1.innerText === 'lock' && lock2.innerText === 'lock') {
+    selectedList = filterList('both');
+    if(selectedList.name === 'Error:') {
+      choice = selectedList[0];
+    } else {
+    choice = randomSelector(selectedList);
+    }
+  } else if (lock1.innerText === 'lock') {
+    selectedList = filterList('cuisine');
+    choice = randomSelector(selectedList);
   } else if (lock2.innerText === 'lock') {
-    var selectedList = filterList('price');
-    choice = selectedList[Math.floor(Math.random() * selectedList.length)];
-  } else if (lock1.innerText === 'lock' && lock2.innerText === 'lock') {
-    var selectedList = filterList('both');
-  }else {
-    choice = restaurantList[Math.floor(Math.random() * restaurantList.length)];
+    selectedList = filterList('price');
+    choice = randomSelector(selectedList);
+  } else {
+    choice = randomSelector(restaurantList);
   }
   return choice
 }
-function spinRoulette(e) {
+function spinRoulette() {
   choice = randomChoice();
   let rouletteTitle = document.getElementById('rw1');
   let rouletteCuisine = document.getElementById('rw2');
@@ -87,7 +121,7 @@ function spinRoulette(e) {
   roulettePrice.innerText = choice.price;
 }
 function toggleLock(e) {
-   if (e.target.innerText == 'lock') {
+   if (e.target.innerText === 'lock') {
     e.target.innerText = 'lock_open';
     e.target.classList.add('open');
    } else {
